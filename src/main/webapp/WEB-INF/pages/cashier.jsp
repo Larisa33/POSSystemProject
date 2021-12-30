@@ -20,6 +20,7 @@
 
         <!-- CLIENT -->
         <div class="client">
+            
             <div class="produse-bon">
                 <div class="prod-info" > <h3 class="detalii-mic-bon"> Nr. </h3> </div>
                 <div class="prod-info" > <h3 class="detalii-mic-bon"> Cant </h3></div>

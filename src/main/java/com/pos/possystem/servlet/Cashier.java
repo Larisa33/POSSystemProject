@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Larisa
  */
-@WebServlet(name = "Screen", urlPatterns = {"/Screen"})
-public class Screen extends HttpServlet {
+@WebServlet(name = "Cashier", urlPatterns = {"/Cashier"})
+public class Cashier extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,7 +58,7 @@ public class Screen extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        request.getRequestDispatcher("/WEB-INF/pages/screen.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/cashier.jsp").forward(request, response);
         //processRequest(request, response);
     }
 

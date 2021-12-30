@@ -6,18 +6,10 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags/" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Cashier Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/Styles/cashier.css" />
-    </head>
-    <body>
-
+<t:cashierTemplate pageTitle="Cashier">
         <!-- CLIENT -->
         <div class="client">
             
@@ -65,5 +57,4 @@
         </div>    
         <a class="w-100 btn btn-lg btn-primary"  href="${pageContext.request.contextPath}/Administrator" role="button">Administrator</a>
         <a class="w-100 btn btn-lg btn-primary"  href="${pageContext.request.contextPath}" role="button">Go back to main page</a>
-    </body>
-</html>
+</t:cashierTemplate>

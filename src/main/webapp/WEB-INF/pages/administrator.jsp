@@ -72,7 +72,7 @@ body {
       <h1 class="h3 mb-3 fw-normal">Buna ziua!</h1>
 
     <a class="w-100 btn btn-lg btn-primary first-btn"  href="${pageContext.request.contextPath}/Stocks" role="button">Manage Stocks</a>
-    <a class="w-100 btn btn-lg btn-primary second-btn"  href="${pageContext.request.contextPath}/Administrator" role="button">Handle returns</a>
+    <a class="w-100 btn btn-lg btn-primary second-btn"  href="${pageContext.request.contextPath}/HandleReturns" role="button">Handle returns</a>
     <a class="w-100 btn btn-lg btn-primary"  href="${pageContext.request.contextPath}" role="button">Go back to main page</a>
   </form>
     </main>

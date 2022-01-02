@@ -8,8 +8,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
 */
 
     body {
-        margin:30px;
-        margin-top:50px;
+        margin:100px; 
+        margin-top:100px;
+    }
+    .cashier-screen {
+        margin-top: 50px;
     }
 
     /*CASIER*/

@@ -6,10 +6,7 @@ package com.pos.possystem.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.annotation.security.DeclareRoles;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.HttpConstraint;
-import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,15 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Larisa
  */
-@DeclareRoles({"AdminRole", "ManagerRole", "CasierRole"})
-@ServletSecurity(
-        value = @HttpConstraint(
-                rolesAllowed = {"AdminRole"}
-        )
-)
-
-@WebServlet(name = "Administrator", urlPatterns = {"/Administrator"})
-public class Administrator extends HttpServlet {
+@WebServlet(name = "Logout", urlPatterns = {"/Logout"})
+public class Logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,10 +36,10 @@ public class Administrator extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Administrator</title>");
+            out.println("<title>Servlet Logout</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Administrator at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Logout at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -67,8 +57,9 @@ public class Administrator extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/pages/administrator.jsp").forward(request, response);
-        // processRequest(request, response);
+//        processRequest(request, response);
+        request.logout();
+        response.sendRedirect(request.getContextPath());
     }
 
     /**

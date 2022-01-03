@@ -22,12 +22,12 @@ import javax.servlet.http.HttpServletResponse;
 @DeclareRoles({"AdminRole", "ManagerRole", "CasierRole"})
 @ServletSecurity(
         value = @HttpConstraint(
-                rolesAllowed = {"AdminRole"}
+                rolesAllowed = {"AdminRole", "ManagerRole"}
         )
 )
 
-@WebServlet(name = "Administrator", urlPatterns = {"/Administrator"})
-public class Administrator extends HttpServlet {
+@WebServlet(name = "Manager", urlPatterns = {"/Manager"})
+public class Manager extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,10 +46,10 @@ public class Administrator extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Administrator</title>");
+            out.println("<title>Servlet Manager</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Administrator at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Manager at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -67,8 +67,8 @@ public class Administrator extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/pages/administrator.jsp").forward(request, response);
-        // processRequest(request, response);
+//        processRequest(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/handleReturns.jsp").forward(request, response);
     }
 
     /**

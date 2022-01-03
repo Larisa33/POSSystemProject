@@ -50,7 +50,7 @@ body {
 
 .casier {
     margin-bottom:15px;
-    margin-top:30px;
+    margin-top:15px;
 }
 
 .admin {
@@ -64,10 +64,9 @@ body {
 <main class="form-signin">
   <form>
       <h1 class="h3 mb-3 fw-normal">Buna ziua! <br> Va rugam sa alegeti functia ocupata! </h1>
-
-    <a class="w-100 btn btn-lg btn-primary casier"  href="${pageContext.request.contextPath}/Cashier" role="button">Casier</a>
     <a class="w-100 btn btn-lg btn-primary admin"  href="${pageContext.request.contextPath}/Administrator" role="button">Administrator</a>
-    <a class="w-100 btn btn-lg btn-primary"  href="${pageContext.request.contextPath}/Administrator" role="button">Manager</a>
+    <a class="w-100 btn btn-lg btn-primary"  href="${pageContext.request.contextPath}/Manager" role="button">Manager</a>
+    <a class="w-100 btn btn-lg btn-primary casier"  href="${pageContext.request.contextPath}/Cashier" role="button">Casier</a>
     <p class="mt-5 mb-3 text-muted">&copy; Echipa17 2021-2022</p>
   </form>
     </main>

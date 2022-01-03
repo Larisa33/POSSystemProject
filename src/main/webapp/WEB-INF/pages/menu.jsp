@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -56,11 +57,32 @@
     </head>
     <body> 
         <ul class="topnav">
-            <li><a class="active" href="${pageContext.request.contextPath}">POSSystem</a></li>
-            <li><a href="${pageContext.request.contextPath}/Administrator">Administrator</a></li>
-            <li><a href="${pageContext.request.contextPath}/Manager">Manager</a></li>
-            <li><a href="${pageContext.request.contextPath}/Cashier">Cashier</a></li>
-            <li class="right"><a href="#about">Login</a></li>
+            <li><a class="active" href="${pageContext.request.contextPath}/Logout">POSSystem</a></li>
+                <c:if test="${pageContext.request.isUserInRole('AdminRole')}">
+                <li class="${activePage eq 'Administrator' ? 'active' : ' '}">
+                    <a href="${pageContext.request.contextPath}/Administrator">Administrator</a>
+                </li>
+            </c:if>   
+            <c:if test="${pageContext.request.isUserInRole('ManagerRole')}">
+                <li class="${activePage eq 'Administrator' ? 'active' : ' '}">
+                    <a href="${pageContext.request.contextPath}/Manager">Manager</a>
+                </li>
+            </c:if> 
+            <c:if test="${pageContext.request.isUserInRole('CasierRole')}">
+                <li class="${activePage eq 'Administrator' ? 'active' : ' '}">
+                    <a href="${pageContext.request.contextPath}/Cashier">Cashier</a>
+                </li>
+            </c:if> 
+            <li class="right">
+                <c:choose>
+                    <c:when test="${pageContext.request.getRemoteUser()==null}">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/Login"> Login </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/Logout"> Logout </a>
+                    </c:otherwise>
+                </c:choose>
+            </li>
         </ul>
     </body>
 </html>

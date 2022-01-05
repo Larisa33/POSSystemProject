@@ -8,12 +8,8 @@ import com.pos.possystem.common.ProductDetails;
 import com.pos.possystem.ejb.ProductBean;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import javax.annotation.security.DeclareRoles;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.HttpConstraint;
-import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,19 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author DANIELA
+ * @author Larisa
  */
-@DeclareRoles({"AdminRole", "ManagerRole", "CasierRole"})
-@ServletSecurity(
-        value = @HttpConstraint(
-                rolesAllowed = {"AdminRole"}
-        )
-)
-@WebServlet(name = "Products", urlPatterns = {"/Products"})
-public class Products extends HttpServlet {
-    
+@WebServlet(name = "DisplayProducts", urlPatterns = {"/DisplayProducts"})
+public class DisplayProducts extends HttpServlet {
+
     @Inject
-    private ProductBean productBean;
+    ProductBean productBean;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,10 +42,10 @@ public class Products extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Products</title>");            
+            out.println("<title>Servlet DisplayProducts</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Products at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DisplayProducts at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,11 +63,13 @@ public class Products extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // processRequest(request, response);
-       request.setAttribute("activePage","Products");
-       List<ProductDetails> products=productBean.getAllProducts();
-       request.setAttribute("products", products);
-       request.getRequestDispatcher("/WEB-INF/pages/products.jsp").forward(request, response);
+//        processRequest(request, response);
+
+        int ProductId = Integer.parseInt(request.getParameter("id"));
+          ProductDetails product = productBean.findByBarcode(ProductId);
+        request.setAttribute("product", product);
+
+        request.getRequestDispatcher("/WEB-INF/pages/displayProduct.jsp").forward(request, response);
     }
 
     /**

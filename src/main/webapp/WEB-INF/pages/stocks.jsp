@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="barcode" class="form-label">Barcode </label>
-                <input type="text" class="form-control" id="barcode" name="barcode"placeholder="Barcode" value="${car.barcode}" required="">
+                <input type="text" class="form-control" id="barcode" name="barcode"placeholder="Barcode" value="${product.barcode}" required="">
                 <div class="invalid-feedback">
                     Barcode is required.
                 </div>
@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="parking_spot" class="form-label">Product name</label>
-                <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Product name" value="${car.product_name}" required="">
+                <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Product name" value="${product.product_name}" required="">
                 <div class="invalid-feedback">
                     Product name is required.
                 </div>
@@ -33,18 +33,8 @@
 
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="parking_spot" class="form-label">Description</label>
-                <input type="text" class="form-control" id="description" name="Description" placeholder="description" value="${car.description}" required="">
-                <div class="invalid-feedback">
-                    Description name is required.
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 mb-3">
                 <label for="parking_spot" class="form-label">Price</label>
-                <input type="text" class="form-control" id="price" name="price" placeholder="Price" value="${car.price}" required="">
+                <input type="text" class="form-control" id="price" name="price" placeholder="Price" value="${product.price}" required="">
                 <div class="invalid-feedback">
                     Price name is required.
                 </div>
@@ -54,7 +44,7 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="parking_spot" class="form-label">Stock</label>
-                <input type="text" class="form-control" id="stock" name="stock" placeholder="Stock " value="${car.stock}" required="">
+                <input type="text" class="form-control" id="stock" name="stock" placeholder="Stock " value="${product.stock}" required="">
                 <div class="invalid-feedback">
                     Stock name is required.
                 </div>
@@ -62,7 +52,8 @@
         </div>
 
 
-        <input type="hidden" name="car_id" value="${car.id}"/>
+        <input type="hidden" name="car_id" value="${product.id}"/>
+        <hr class="my-4">
         <button class="w-100 btn btn-primary btn-lg" type="submit">Save</button>
 
     </form>

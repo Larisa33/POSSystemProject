@@ -6,7 +6,10 @@ package com.pos.possystem.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.annotation.security.DeclareRoles;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +19,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Ali
  */
-@WebServlet(name = "HandleReturns", urlPatterns = {"/HandleReturns"})
+@DeclareRoles({"AdminRole", "ManagerRole", "CasierRole"})
+@ServletSecurity(
+        value = @HttpConstraint(
+                rolesAllowed = {"ManagerRole"}
+        )
+)
+@WebServlet(name = "HandleReturns", urlPatterns = {"/Returns/HandleReturns"})
 public class HandleReturns extends HttpServlet {
 
     /**

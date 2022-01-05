@@ -6,7 +6,10 @@ package com.pos.possystem.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.annotation.security.DeclareRoles;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +19,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Larisa
  */
-@WebServlet(name = "Stocks", urlPatterns = {"/Stocks"})
+@DeclareRoles({"AdminRole", "ManagerRole", "CasierRole"})
+@ServletSecurity(
+        value = @HttpConstraint(
+                rolesAllowed = {"AdminRole"}
+        )
+)
+@WebServlet(name = "Stocks", urlPatterns = {"/Products/Stocks"})
 public class Stocks extends HttpServlet {
 
     /**
@@ -72,6 +81,13 @@ public class Stocks extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+//        String licensePlate=request.getParameter("license_plate");
+//        String parkingSpot=request.getParameter("parking_spot");
+//        int ownerId=Integer.parseInt(request.getParameter("owner_id"));
+//        
+//        carBean.createCar(licensePlate, parkingSpot, ownerId);
+//        response.sendRedirect(request.getContextPath()+"/Cars");
+        
         processRequest(request, response);
     }
 

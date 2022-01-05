@@ -11,11 +11,11 @@
 
 <t:pageTemplate pageTitle="Handle Returns">
     <h1>Handle Returns</h1>
-    <form class="needs-validation" novalidate method="POST" action="">
+    <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Manager>
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="cod"> Cod de bare </label>
-                <input type="text" class="form-control" id="ceva" placeholder="Ex:123456" value="" required>
+                <input type="text" class="form-control" id="barcode" name="lbarcode" placeholder="Ex:123456" value="" required>
                 <div class="invalid-feedback">
                       Acest camp este obligatoriu!
                 </div>
@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="Motiv"> Motiv </label>
-                <input type="text" class="form-control" id="parking_spot" placeholder="Ex: produs defect" value="" required>
+                <input type="text" class="form-control" id="reason" name="reason" placeholder="Ex: produs defect" value="" required>
                 <div class="invalid-feedback">
                     Acest camp este obligatoriu!
                 </div>

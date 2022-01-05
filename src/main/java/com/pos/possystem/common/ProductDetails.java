@@ -22,8 +22,7 @@ public class ProductDetails implements java.io.Serializable {
         this.price = price;
         this.stock = stock;
     }
-   
-
+    
     public Integer getId() {
         return id;
     }

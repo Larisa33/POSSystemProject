@@ -14,27 +14,21 @@
     <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/Returns/HandleReturns" role="button">Return new item &raquo;</a>
     <hr class="my-4">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <h6>BARCODE</h6>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <h6>REASON</h6>
-        </div>
-        <div class="col-md-3">
-            <h6>DATE</h6>
         </div>
     </div>
     <hr class="my-2">
     <c:forEach var="return" items="${returns}" varStatus="status">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 ${return.barcode}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 ${return.reason}
-            </div>
-            <div class="col-md-3">
-                ${return.date}
             </div>
         </div>
     </c:forEach>

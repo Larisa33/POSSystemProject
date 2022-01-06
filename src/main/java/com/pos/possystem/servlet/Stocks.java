@@ -4,9 +4,11 @@
  */
 package com.pos.possystem.servlet;
 
+import com.pos.possystem.ejb.ProductBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.annotation.security.DeclareRoles;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.HttpConstraint;
 import javax.servlet.annotation.ServletSecurity;
@@ -28,6 +30,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Stocks", urlPatterns = {"/Products/Stocks"})
 public class Stocks extends HttpServlet {
 
+    @Inject 
+    ProductBean productBean;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,7 +49,7 @@ public class Stocks extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Stocks</title>");            
+            out.println("<title>Servlet Stocks</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Stocks at " + request.getContextPath() + "</h1>");
@@ -67,7 +71,7 @@ public class Stocks extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/pages/stocks.jsp").forward(request, response);
-       // processRequest(request, response);
+        // processRequest(request, response);
     }
 
     /**
@@ -81,14 +85,14 @@ public class Stocks extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        String licensePlate=request.getParameter("license_plate");
-//        String parkingSpot=request.getParameter("parking_spot");
-//        int ownerId=Integer.parseInt(request.getParameter("owner_id"));
-//        
-//        carBean.createCar(licensePlate, parkingSpot, ownerId);
-//        response.sendRedirect(request.getContextPath()+"/Cars");
+        int barcode = Integer.parseInt(request.getParameter("barcode"));
+        String product_name = request.getParameter("product_name");
+        int price = Integer.parseInt(request.getParameter("price"));
+        int stock = Integer.parseInt(request.getParameter("stock"));
         
-        processRequest(request, response);
+        productBean.createProduct(barcode, product_name, price, stock);
+        
+        response.sendRedirect(request.getContextPath()+"/Products");
     }
 
     /**

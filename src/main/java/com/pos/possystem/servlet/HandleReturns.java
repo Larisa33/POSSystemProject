@@ -4,9 +4,11 @@
  */
 package com.pos.possystem.servlet;
 
+import com.pos.possystem.ejb.ReturnBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.annotation.security.DeclareRoles;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.HttpConstraint;
 import javax.servlet.annotation.ServletSecurity;
@@ -28,6 +30,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "HandleReturns", urlPatterns = {"/Returns/HandleReturns"})
 public class HandleReturns extends HttpServlet {
 
+    @Inject
+    ReturnBean returnBean;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -81,7 +85,12 @@ public class HandleReturns extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int barcode = Integer.parseInt(request.getParameter("barcode"));
+        String reason = request.getParameter("reason");
+       
+       returnBean.createReturn(barcode, reason);
+       response.sendRedirect(request.getContextPath()+"/Returns");
+        
     }
 
     /**

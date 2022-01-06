@@ -5,6 +5,7 @@
 package com.pos.possystem.ejb;
 
 import com.pos.possystem.common.ReturnDetails;
+import com.pos.possystem.entity.Product;
 import com.pos.possystem.entity.Return;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,15 @@ public class ReturnBean {
             throw new EJBException(ex);
         }
 
+    }
+    
+    public void createReturn(Integer barcode, String reason) {
+        LOG.info("createProduct");
+        Return ret = new Return();
+        ret.setBarcode(barcode);
+        ret.setReason(reason);
+ 
+        em.persist(ret);
     }
     
      private List<ReturnDetails> copyProductsToDetails(List<Return> returns){

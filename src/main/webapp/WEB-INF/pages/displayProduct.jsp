@@ -18,6 +18,9 @@
         <br>
         <div class="col-md-3"> Product price:  </div>
         <hr class="my-4">
+       <%= request.getAttribute("product")%>
+       ${product.barcode}
+        
         <a class="w-100 btn btn-primary btn-lg"  href="${pageContext.request.contextPath}/Client" role="button">Check another item</a>
     </div>
 </t:pageTemplate>  

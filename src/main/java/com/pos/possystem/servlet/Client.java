@@ -81,9 +81,12 @@ public class Client extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int barcode = Integer.parseInt(request.getParameter("barcode"));
+        Integer barcode = Integer.parseInt(request.getParameter("barcode"));
         ProductDetails product = productBean.findByBarcode(barcode);
-        processRequest(request, response);
+        System.out.println("la inceput de servlet" + " " + product.getBarcode() + " " + "test servlet");
+        request.setAttribute("product", product);
+        response.sendRedirect(request.getContextPath() + "/DisplayProducts");
+        System.out.println("dupa post");
     }
 
     /**

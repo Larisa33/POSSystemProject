@@ -6,6 +6,7 @@ package com.pos.possystem.servlet;
 
 import com.pos.possystem.common.ProductDetails;
 import com.pos.possystem.ejb.ProductBean;
+import com.pos.possystem.entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.inject.Inject;
@@ -65,9 +66,12 @@ public class DisplayProducts extends HttpServlet {
             throws ServletException, IOException {
 //        processRequest(request, response);
 
-        int ProductId = Integer.parseInt(request.getParameter("id"));
-          ProductDetails product = productBean.findByBarcode(ProductId);
-        request.setAttribute("product", product);
+//        int ProductId = Integer.parseInt(request.getParameter("id"));
+//          ProductDetails product = productBean.findByBarcode(ProductId);
+//        request.setAttribute("product", product);
+
+        Product product = new Product();
+        product =(Product) request.getAttribute("product");
 
         request.getRequestDispatcher("/WEB-INF/pages/displayProduct.jsp").forward(request, response);
     }

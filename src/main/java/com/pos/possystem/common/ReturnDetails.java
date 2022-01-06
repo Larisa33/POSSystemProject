@@ -23,8 +23,6 @@ public class ReturnDetails implements java.io.Serializable{
         this.date = date;
     }
     
-    
-
     public Integer getId() {
         return id;
     }

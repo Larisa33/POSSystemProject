@@ -65,7 +65,7 @@
             </c:if>   
             <c:if test="${pageContext.request.isUserInRole('ManagerRole')}">
                 <li class="${activePage eq 'Administrator' ? 'active' : ' '}">
-                    <a href="${pageContext.request.contextPath}/Manager">Manager</a>
+                    <a href="${pageContext.request.contextPath}/Returns">Manager</a>
                 </li>
             </c:if> 
             <c:if test="${pageContext.request.isUserInRole('CasierRole')}">

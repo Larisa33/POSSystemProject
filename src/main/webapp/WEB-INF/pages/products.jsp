@@ -38,7 +38,7 @@
                 ${product.stock}
             </div>
             <div class="col-md-2">
-                <a class="btn btn-secondary" href="${pageContext.request.contextPath}" role="button">Edit Product</a>
+                <a class="btn btn-secondary" href="${pageContext.request.contextPath}/EditProduct?id=${product.id}" role="button">Edit Product</a>
             </div>
         </div>
     </c:forEach>

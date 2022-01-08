@@ -6,6 +6,7 @@ package com.pos.possystem.ejb;
 
 import com.pos.possystem.common.ProductDetails;
 import com.pos.possystem.entity.Product;
+import com.pos.possystem.entity.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -66,11 +67,11 @@ public class ProductBean {
 
         em.persist(product);
     }
- 
+
     public ProductDetails findByBarcode(Integer id) {
-            System.out.println("la inceput" + id + "test");
+        System.out.println("la inceput" + id + "test");
         List<ProductDetails> Products = getAllProducts();
-         System.out.println(Products);
+        System.out.println(Products);
         for (ProductDetails prod : Products) {
             System.out.println("aici e prod" + prod);
             if (prod.getId().equals(id)) {
@@ -82,11 +83,33 @@ public class ProductBean {
         return null;
     }
 
+    public ProductDetails findById(Integer productId) {
+        Product product = em.find(Product.class, productId);
+        return new ProductDetails(product.getId(), product.getBarcode(), product.getProduct_name(), product.getPrice(), product.getStock());
+    }
+
+    public void updateProduct(Integer id,Integer barcod, String product_name, Integer price, Integer stock) {
+        LOG.info("updateProduct");
+        Product product = em.find(Product.class, id);
+        product.setBarcode(barcod);
+        product.setProduct_name(product_name);
+        product.setPrice(price);
+        product.setStock(stock);
+
+//        //remove this car from old owner
+//        User oldUser = product.getUser();
+//        oldUser.getCars().remove(car);
+//
+//        //add the car to its new user
+//        User user = em.find(User.class, userId);
+//        user.getCars().add(car);
+//        car.setUser(user);
+    }
+
 //    public ProductDetails getProductByBarcode(Integer barCode) {
 //        Product product = em.find(Product.class, barCode);
 //        return new ProductDetails(product.getId(), product.getBarcode(), product.getProduct_name(), product.getPrice(), product.getStock());
 //    }
-
 //    public List<ProductDetails> getProductByBarcode() {
 //
 //        LOG.info("getProductByBarcode");

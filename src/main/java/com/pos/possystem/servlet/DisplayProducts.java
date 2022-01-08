@@ -72,6 +72,7 @@ public class DisplayProducts extends HttpServlet {
 
         Product product = new Product();
         product =(Product) request.getAttribute("product");
+        System.out.println("Aici l-am primit " + product);
 
         request.getRequestDispatcher("/WEB-INF/pages/displayProduct.jsp").forward(request, response);
     }

@@ -4,21 +4,9 @@
  */
 package com.pos.possystem.servlet;
 
-import com.pos.possystem.common.ProductDetails;
-import com.pos.possystem.ejb.ProductBean;
-import com.pos.possystem.ejb.SaleBean;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import javax.annotation.security.DeclareRoles;
-import javax.inject.Inject;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.HttpConstraint;
-import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,21 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Larisa
  */
-@DeclareRoles({"AdminRole", "ManagerRole", "CasierRole"})
-@ServletSecurity(
-        value = @HttpConstraint(
-                rolesAllowed = {"AdminRole", "ManagerRole", "CasierRole"}
-        )
-)
-
-@WebServlet(name = "Cashier", urlPatterns = {"/Cashier"})
-public class Cashier extends HttpServlet {
-
-    @Inject
-    SaleBean saleBean;
-
-    @Inject
-    private ProductBean productBean;
+@WebServlet(name = "Plata", urlPatterns = {"/Plata"})
+public class Plata extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -61,10 +36,10 @@ public class Cashier extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Screen</title>");
+            out.println("<title>Servlet Plata</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Screen at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Plata at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -82,20 +57,7 @@ public class Cashier extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("activePage", "Products");
-        List<ProductDetails> products = productBean.getAllProducts();
-        request.setAttribute("products", products);
-        
-        if(!saleBean.getProductIds().isEmpty()){
-            Collection<String> product_names= productBean.findNames(saleBean.getProductIds());
-            Collection<String> product_price= productBean.findPrice(saleBean.getProductIds());
-            request.setAttribute("sale",product_names);
-            request.setAttribute("sale_price",product_price);
-            System.out.println("Aici e price: " + product_price);
-            System.out.println("Aici e sale: " + product_names);
-        }
-        request.getRequestDispatcher("/WEB-INF/pages/cashier.jsp").forward(request, response);
-        //processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -109,18 +71,9 @@ public class Cashier extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String[] productIdsAsString = request.getParameterValues("product_id");
-        System.out.println("la string[]: " + productIdsAsString);
-        if (productIdsAsString != null) {
-            List <Integer> productIds = new ArrayList<Integer>();
-            for(String productIdAsString : productIdsAsString) {
-                productIds.add(Integer.parseInt(productIdAsString));
-            }
-            saleBean.getProductIds().addAll(productIds);
-        }
-        response.sendRedirect(request.getContextPath() + "/Cashier");
-//         processRequest(request, response);
+//        processRequest(request, response);
+        request.getSession().invalidate();
+        request.getRequestDispatcher("/WEB-INF/pages/cashier.jsp").forward(request, response);
     }
 
     /**

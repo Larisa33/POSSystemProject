@@ -10,7 +10,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
     body {
-        margin:100px; 
+        margin:100px;
         margin-top:100px;
     }
     .cashier-screen {
@@ -37,12 +37,12 @@
     }
 
     .prod-info {
-        display: inline;
+        float:left;
     }
 
     .detalii-mic {
         float:left;
-        width: 90px;
+        width: 130px;
         margin:5px;
         text-align:center;
         border-bottom: 1px solid black;
@@ -57,16 +57,19 @@
     }
 
     .afisare-cod {
-        height: 100px;
+        height: 500px;
         width:400px;
         margin:20px;
-        margin-bottom:150px;
         float:right;
+        border: 2px solid black;
+        background-color: white;
     }
-
-    .input-cod {
-        height: 100px;
-        width:400px;
+    .produse {
+        height: 450px;
+    }
+    .button-subit {
+        width: 400px;
+        height: 50px;
     }
 
     .plata {
@@ -108,7 +111,7 @@
 
     .detalii-mic-bon {
         float:left;
-        width: 55px;
+        width: 80px;
         margin:5px;
         text-align:center;
         border-bottom: 1px solid black;
@@ -138,6 +141,9 @@
         }
 
         /*CASIER*/
+        .col-md-2{
+            margin-right: 20px;
+        }
         .casier{
             width: 800px;
             height: 530px;
@@ -152,7 +158,7 @@
         }
 
         .detalii-mic {
-            width: 70px;
+            width: 90px;
             margin:5px;
         }
 
@@ -162,20 +168,22 @@
         }
 
         .afisare-cod {
-            height: 90px;
+            height: 400px;
             width:240px;
             margin-right:40px;
-            margin-bottom:90px;
         }
 
-        .input-cod {
-            height: 90px;
-            width:240px;
+        .produse {
+            height: 360px;
+        }
+        .button-subit {
+            width: 240px;
+            height: 40px;
         }
 
         .plata {
             width: 240px;
-            height: 50px;
+            height: 40px;
             margin-right:40px;
         }
 
@@ -204,7 +212,7 @@
         }
 
         .detalii-mic-bon {
-            width: 45px;
+            width: 60px;
             margin:5px;
         }
 
@@ -223,11 +231,14 @@
             height: 450px;
         }
     }
-    
+
     /*MEDIA QUERY 2*/
     @media only screen and (max-width: 1560px) {
         body {
             background-color: blue;
+        }
+        .col-md-2{
+            margin-right: 10px;
         }
 
         /*CASHIER*/
@@ -236,7 +247,7 @@
             height: 530px;
             margin-left:100px;
         }
-        
+
         .afisare-produse {
             height:400px;
             width: 380px;
@@ -245,7 +256,7 @@
         }
 
         .detalii-mic {
-            width: 50px;
+            width: 70px;
         }
 
         .detalii {
@@ -253,15 +264,16 @@
         }
 
         .afisare-cod {
-            height: 80px;
-            width:210px;
+            height: 400px;
+            width:  210px;
             margin-right:40px;
-            margin-bottom:80px;
         }
-
-        .input-cod {
-            height: 80px;
-            width:210px;
+        .produse {
+            height: 370px;
+        }
+        .button-subit {
+            width: 210px;
+            height: 30px;
         }
 
         .plata {
@@ -295,7 +307,7 @@
         }
 
         .detalii-mic-bon {
-            width: 35px;
+            width: 50px;
             margin:5px;
         }
 
@@ -314,17 +326,40 @@
             height: 450px;
         }
     }
+    .col-md-2{
+        display:inline;
+        margin-right: 50px;
+    }
+    .nr {
+        height: 100%;
+    }
+    .nume {
+        text-align: center;
+        height: 100%;
+    }
+    .pret {
+        text-align: center;
+        height: 100%;
+    }
+
 </style>
 <t:cashierTemplate pageTitle="Cashier">
-        <!-- CLIENT -->
-        <div class="cashier-screen">
+    <!-- CLIENT -->
+    <div class="cashier-screen">
         <div class="client">
-            
+
             <div class="produse-bon">
-                <div class="prod-info" > <h3 class="detalii-mic-bon"> Nr. </h3> </div>
-                <div class="prod-info" > <h3 class="detalii-mic-bon"> Cant </h3></div>
-                <div class="prod-info" > <h3 class="detalii"> Nume Produs </h3> </div>
-                <div class="prod-info"> <h3 class="detalii-mic-bon"> Pret </h3> </div>
+                <div class="prod-info nr" > <h3 class="detalii-mic-bon"> Nr. </h3> </div>
+                <div class="prod-info nume" > <h3 class="detalii"> Nume Produs </h3> 
+                    <c:forEach var="name" items="${sale}" varStatus="status">
+                        <p> ${name} </p>
+                    </c:forEach>
+                </div>
+                <div class="prod-info pret"> <h3 class="detalii-mic-bon"> Pret </h3> 
+                    <c:forEach var="price" items="${sale_price}" varStatus="status">
+                        <p> ${price}lei </p>
+                    </c:forEach>
+                </div>
             </div>
 
             <div class="total-bon"> 
@@ -333,34 +368,64 @@
         </div>
 
         <!-- CASIER -->
+
         <div class="casier">
             <!-- ecran unde apar produsele introduse -->
             <div class="afisare-produse">
-                <div class="prod-info" > <h3 class="detalii-mic"> Nr. </h3> </div>
-                <div class="prod-info" > <h3 class="detalii-mic"> Cantitate </h3></div>
-                <div class="prod-info" > <h3 class="detalii"> Nume Produs </h3> </div>
-                <div class="prod-info"> <h3 class="detalii-mic"> Pret </h3> </div>
+                <div class="prod-info  nr" > <h3 class="detalii-mic"> Nr. </h3> 
+                </div> 
+                <div class="prod-info nume" > <h3 class="detalii"> Nume Produs </h3>
+                    <c:forEach var="name" items="${sale}" varStatus="status">
+                        <p> ${name} </p>
+                    </c:forEach>
+
+                </div>
+                <div class="prod-info pret"> <h3 class="detalii-mic"> Pret </h3> 
+                    <c:forEach var="price" items="${sale_price}" varStatus="status">
+                        <p> ${price}lei </p>
+                    </c:forEach>
+                </div>
             </div>
 
             <!-- ecran unde apare codul tastat/introdus -->
-            <div class="afisare-cod">
-                <input type="text" class="input-cod" />
-            </div>
+            <form method="POST" action="">
+                <div class="afisare-cod">
+                    <div class="produse">
+                        <c:forEach var="product" items="${products}" varStatus="status">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <input type="checkbox"  name="product_id" value="${product.id}">
+                                </div>
+                                <div class="col-md-2">
+                                    ${product.barcode}
+                                </div>
+                                <div class="col-md-2">
+                                    ${product.price}lei
+                                </div>
+                                <div class="col-md-2">
+                                    ${product.product_name}
+                                </div>
+
+                            </div>
+                        </c:forEach>
+                    </div>
+                    <div >
+                        <button class="button-subit" type="submit"> Add Product</button>
+                    </div>
+                </div>
+            </form>
 
             <!-- button plata card -->
-            <div class="plata">
-                <button class="button-plata"> PLATA CARD </button>
-            </div>
-
-            <!--button plata cash -->
-            <div class="plata">
-                <button class="button-plata"> PLATA CASH </button>
-            </div>
-
+            <form method="POST" action="${pageContext.request.contextPath}/Plata">
+                <div class="plata">
+                    <button class="button-plata card"> PLATA </button>
+                </div>
+            </form>
             <div class="total">
                 <h2 class="pret-total"> Total: </h2>
             </div>
 
-        </div>  
-        </div>
+        </div> 
+
+    </div>
 </t:cashierTemplate>

@@ -6,8 +6,10 @@ package com.pos.possystem.servlet;
 
 import com.pos.possystem.common.ProductDetails;
 import com.pos.possystem.ejb.ProductBean;
+import com.pos.possystem.ejb.SaleBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -63,10 +65,7 @@ public class Client extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-
-//        int barCode = Integer.parseInt(request.getParameter("barcode"));
-//        ProductDetails product = productBean.getProductByBarcode(barCode);
+     
         request.getRequestDispatcher("/WEB-INF/pages/client.jsp").forward(request, response);
     }
 

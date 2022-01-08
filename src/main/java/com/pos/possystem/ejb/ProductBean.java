@@ -7,6 +7,7 @@ package com.pos.possystem.ejb;
 import com.pos.possystem.common.ProductDetails;
 import com.pos.possystem.entity.Product;
 import com.pos.possystem.entity.User;
+import java.util.Collection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -85,48 +86,35 @@ public class ProductBean {
 
     public ProductDetails findById(Integer productId) {
         Product product = em.find(Product.class, productId);
+         System.out.println("AAAAAIn bean: " + product.getId() + product.getBarcode());
         return new ProductDetails(product.getId(), product.getBarcode(), product.getProduct_name(), product.getPrice(), product.getStock());
+//        System.out.println("In bean: " + product.getId() + product.getBarcode());
     }
 
-    public void updateProduct(Integer id,Integer barcod, String product_name, Integer price, Integer stock) {
+    public void updateProduct(Integer id, Integer barcod, String product_name, Integer price, Integer stock) {
         LOG.info("updateProduct");
         Product product = em.find(Product.class, id);
         product.setBarcode(barcod);
         product.setProduct_name(product_name);
         product.setPrice(price);
         product.setStock(stock);
-
-//        //remove this car from old owner
-//        User oldUser = product.getUser();
-//        oldUser.getCars().remove(car);
-//
-//        //add the car to its new user
-//        User user = em.find(User.class, userId);
-//        user.getCars().add(car);
-//        car.setUser(user);
     }
 
-//    public ProductDetails getProductByBarcode(Integer barCode) {
-//        Product product = em.find(Product.class, barCode);
-//        return new ProductDetails(product.getId(), product.getBarcode(), product.getProduct_name(), product.getPrice(), product.getStock());
-//    }
-//    public List<ProductDetails> getProductByBarcode() {
-//
-//        LOG.info("getProductByBarcode");
-//
-//        try {
-//            Query query = em.createQuery("SELECT p FROM Product p");
-//            List<Product> products = (List<Product>) query.getResultList();
-//            return copyProductsToDetails(products);
-//        } catch (Exception ex) {
-//            throw new EJBException(ex);
-//        }
-//
-//    }
-//    public CarDetails findById(Integer carId) {
-//        Car car = em.find(Car.class, carId);
-//        return new CarDetails(car.getId(), car.getLicensePlate(), car.getParkingSpot(), car.getUser().getUsername());
-//    }
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    public Collection<String> findNames(Collection<Integer> productIds) {
+        LOG.info("findNames");
+        List<String> names = (List<String>) em.createQuery("SELECT p.product_name FROM Product p WHERE p.id IN ?1")
+                .setParameter(1, productIds)
+                .getResultList();
+
+        return names;
+    }
+
+    public Collection<String> findPrice(Collection<Integer> productIds) {
+        LOG.info("findPrice");
+        List<String> price = (List<String>) em.createQuery("SELECT p.price FROM Product p WHERE p.id IN ?1")
+                .setParameter(1, productIds)
+                .getResultList();
+        return price;
+    }
+
 }

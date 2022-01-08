@@ -8,7 +8,6 @@ package com.pos.possystem.servlet;
 import com.pos.possystem.common.ProductDetails;
 import com.pos.possystem.common.UserDetails;
 import com.pos.possystem.ejb.ProductBean;
-import com.pos.possystem.ejb.UserBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -26,8 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "EditProduct", urlPatterns = {"/EditProduct"})
 public class EditProduct extends HttpServlet {
 
-    @Inject
-    UserBean userBean;
 
     @Inject
     ProductBean productBean;
@@ -71,8 +68,6 @@ public class EditProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<UserDetails> users = userBean.getAllUsers();
-        request.setAttribute("users", users);
         int barcod = Integer.parseInt(request.getParameter("id"));
         ProductDetails product = productBean.findById(barcod);
         request.setAttribute("product", product);
@@ -93,11 +88,11 @@ public class EditProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        int barcod = Integer.parseInt(request.getParameter("barcod"));
-        String name = request.getParameter("name");
+        int barcode = Integer.parseInt(request.getParameter("barcode"));
+        String product_name = request.getParameter("product_name");
         int price = Integer.parseInt(request.getParameter("price"));
         int stock = Integer.parseInt(request.getParameter("stock"));
-        productBean.updateProduct(id, barcod, name, price, stock);
+        productBean.updateProduct(id, barcode, product_name, price, stock);
         response.sendRedirect(request.getContextPath() + "/Products");
 
     }

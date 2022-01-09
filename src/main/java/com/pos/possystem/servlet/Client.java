@@ -80,12 +80,17 @@ public class Client extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Integer barcode = Integer.parseInt(request.getParameter("barcode"));
-        ProductDetails product = productBean.findByBarcode(barcode);
-        System.out.println("la inceput de servlet" + " " + product.getBarcode() + " " + "test servlet");
+        List<ProductDetails> products=productBean.getAllProducts();
+       
+        String a=request.getParameter("id_product");
+        System.out.println("Parametru transmis Client : "+a);
+        int productId=Integer.parseInt(request.getParameter("id_product"));
+        ProductDetails product=productBean.findByBarcode(productId);
         request.setAttribute("product", product);
-        response.sendRedirect(request.getContextPath() + "/DisplayProducts");
-        System.out.println("dupa post");
+        request.setAttribute("a", a);
+
+    
+        request.getRequestDispatcher("/WEB-INF/pages/displayProduct.jsp").forward(request, response);
     }
 
     /**

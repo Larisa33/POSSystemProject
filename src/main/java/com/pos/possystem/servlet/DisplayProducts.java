@@ -70,9 +70,9 @@ public class DisplayProducts extends HttpServlet {
 //          ProductDetails product = productBean.findByBarcode(ProductId);
 //        request.setAttribute("product", product);
 
-        Product product = new Product();
-        product =(Product) request.getAttribute("product");
-        System.out.println("Aici l-am primit " + product);
+//        Product product = new Product();
+//        product =(Product) request.getAttribute("product");
+//        System.out.println("Aici l-am primit " + product);
 
         request.getRequestDispatcher("/WEB-INF/pages/displayProduct.jsp").forward(request, response);
     }

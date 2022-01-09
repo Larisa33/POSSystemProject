@@ -24,6 +24,7 @@ public class Return implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    
     private Integer barcode;
     private String reason;
     private Date date;

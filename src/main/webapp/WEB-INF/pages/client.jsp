@@ -10,11 +10,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:pageTemplate pageTitle="Clients Page">  
-    <form method="POST" action="${pageContext.request.contextPath}/Client">
+   <form method="POST" action="${pageContext.request.contextPath}/Client">
         <br> <br>
-        <input type="text" class="form-control" id="barcode" name="barcode" placeholder="ex: 1234">
+        <input type="text" class="form-control" id="id_product" name="id_product" placeholder="ex: 1234">
         <hr class="my-4">
-        <!--<button class="w-100 btn btn-primary btn-lg" type="submit"> Find </button>-->
-        <a class="w-100 btn btn-primary btn-lg" href="${pageContext.request.contextPath}/DisplayProducts" role="button">Find</a>
+
+<!--       <a class="w-100 btn btn-primary btn-lg" href="${pageContext.request.contextPath}/DisplayProducts?id=${id_product}" role="button">Find</a>-->
+         <button class="btn btn-primary btn-lg btn-block" type="submit">Check</button>
     </form>
 </t:pageTemplate>

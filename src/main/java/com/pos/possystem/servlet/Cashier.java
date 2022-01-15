@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
@@ -43,8 +43,12 @@ public class Cashier extends HttpServlet {
     SaleBean saleBean;
 
     @Inject
-    ProductBean productBean;
+    private ProductBean productBean;
 
+    
+    int ab=0;
+    int pret=0;
+    ArrayList<ProductDetails> bon1 = new ArrayList();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -85,21 +89,6 @@ public class Cashier extends HttpServlet {
             throws ServletException, IOException {
         request.setAttribute("activePage", "Products");
 
-//       products se populeaza folosind getAllProducts() din ProdictBean
-        List<ProductDetails> products = productBean.getAllProducts();
-
-//        setam in ghilimele numele obiectului cu care vom afisa datele pe pagina
-//        cashier.jsp, iar dupa virgula precizam ca "products" se populeaza cu
-//        datele din lista creata anterior
-        request.setAttribute("products", products);
-
-        if (!saleBean.getProductIds().isEmpty()) {
-            Collection<String> product_names = productBean.findNames(saleBean.getProductIds());
-            Collection<String> product_price = productBean.findPrice(saleBean.getProductIds());
-            request.setAttribute("sale", product_names);
-            request.setAttribute("sale_price", product_price);
-        }
-
         request.getRequestDispatcher("/WEB-INF/pages/cashier.jsp").forward(request, response);
 
     }
@@ -115,20 +104,21 @@ public class Cashier extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-//        "productIdsAsString" se populeaza cu id-urile venite prin bifarea
-//                unui checkbox, daca acesta nu este null cream o lista cu toate
-//                id-urile facand conversie de la String la Integer
-
-        String[] productIdsAsString = request.getParameterValues("product_id");
-        if (productIdsAsString != null) {
-            List<Integer> productIds = new ArrayList<Integer>();
-            for (String productIdAsString : productIdsAsString) {
-                productIds.add(Integer.parseInt(productIdAsString));
-            }
-            saleBean.getProductIds().addAll(productIds);
+ ArrayList<ProductDetails> bon;
+       if(ab==0){
+       bon=new ArrayList();
+       }
+        String a=request.getParameter("id_product");
+        int productId=Integer.parseInt(request.getParameter("id_product"));
+        ProductDetails product=productBean.findByBarcode(productId);
+        request.setAttribute("product", product);
+        if(product!=null){
+        bon1.add(product);
+        pret=pret+product.getPrice();
         }
-        response.sendRedirect(request.getContextPath() + "/Cashier");
+        request.setAttribute("pret", pret);
+        request.setAttribute("bon1", bon1);
+        request.getRequestDispatcher("/WEB-INF/pages/cashier.jsp").forward(request, response);
     }
 
     /**

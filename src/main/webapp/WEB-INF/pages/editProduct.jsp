@@ -12,7 +12,7 @@
 
 <t:pageTemplate pageTitle="Products">
     <h1>Manage stocks</h1>
-    <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/EditProduct">
+    <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Administrator/Products/EditProduct">
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="barcode" class="form-label">Barcode </label>

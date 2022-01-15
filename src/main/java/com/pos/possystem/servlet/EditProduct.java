@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Denisa
  */
-@WebServlet(name = "EditProduct", urlPatterns = {"/EditProduct"})
+@WebServlet(name = "EditProduct", urlPatterns = {"/Administrator/Products/EditProduct"})
 public class EditProduct extends HttpServlet {
 
 
@@ -93,7 +93,7 @@ public class EditProduct extends HttpServlet {
         int price = Integer.parseInt(request.getParameter("price"));
         int stock = Integer.parseInt(request.getParameter("stock"));
         productBean.updateProduct(id, barcode, product_name, price, stock);
-        response.sendRedirect(request.getContextPath() + "/Products");
+        response.sendRedirect(request.getContextPath() + "/Administrator/Products");
 
     }
 

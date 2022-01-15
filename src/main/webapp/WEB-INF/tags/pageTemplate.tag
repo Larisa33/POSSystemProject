@@ -5,11 +5,13 @@
 --%>
 
 <%@tag description="put the tag description here" pageEncoding="UTF-8"%>
-
-<%-- The list of normal or fragment attributes can be specified here: --%>
 <%@attribute name="pageTitle"%>
 
-<%-- any content can be specified here e.g.: --%>
+<!--Aici este templateul aplicatiei. Acest .tag contine toate elementele care se 
+repeta pe mai multe pagini in aplicatie.
+Este necesar acest tag pentru a evita cod repetitiv, dar si pentru a ne fi mai 
+usor atunci cand vrem sa facem o modificare de aspect vizibila pe toate paginile.-->
+
 <!DOCTYPE html>
 <html>
     <head>

@@ -100,6 +100,7 @@ public class ProductBean {
         product.setStock(stock);
     }
 
+//    metoda care imi da numele produsului in functie de id
     public Collection<String> findNames(Collection<Integer> productIds) {
         LOG.info("findNames");
         List<String> names = (List<String>) em.createQuery("SELECT p.product_name FROM Product p WHERE p.id IN ?1")
@@ -108,7 +109,7 @@ public class ProductBean {
 
         return names;
     }
-
+//    metoda care imi da pretul produsului in functie de id
     public Collection<String> findPrice(Collection<Integer> productIds) {
         LOG.info("findPrice");
         List<String> price = (List<String>) em.createQuery("SELECT p.price FROM Product p WHERE p.id IN ?1")
@@ -117,4 +118,11 @@ public class ProductBean {
         return price;
     }
 
+    public void deleteProductByIds(Collection<Integer> ids) {
+        LOG.info("deleteProductByIds");
+        for(Integer id : ids) {
+            Product product = em.find(Product.class, id);
+            em.remove(product);
+        }
+    }
 }

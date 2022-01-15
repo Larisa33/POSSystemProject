@@ -6,40 +6,49 @@
 
 <t:pageTemplate pageTitle="Products">
     <h1>Manage stocks</h1>
-    <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/Products/Stocks" role="button">Add new product &raquo;</a>
-    <hr class="my-4">
-    <div class="row">
-        <div class="col-md-2">
-            <h6>BARCODE</h6>
-        </div>
-        <div class="col-md-2">
-            <h6>NAME</h6>
-        </div>
-        <div class="col-md-2">
-            <h6>PRICE</h6>
-        </div>
-        <div class="col-md-2">
-            <h6>STOCK</h6>
-        </div>
-    </div>
-    <hr class="my-2">
-    <c:forEach var="product" items="${products}" varStatus="status">
+    <form method="POST" action="${pageContext.request.contextPath}/Administrator/Products">
+        <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/Administrator/Products/Stocks" role="button">Add new product &raquo;</a>
+        <button class="btn btn-danger" type="submit">Delete User</button>
+        <hr class="my-4">
         <div class="row">
-            <div class="col-md-2">
-                ${product.barcode}
+             <div class="col-md-2">
+                <h6>Select to delete</h6>
             </div>
             <div class="col-md-2">
-                ${product.product_name}
+                <h6>BARCODE</h6>
             </div>
             <div class="col-md-2">
-                ${product.price}
+                <h6>NAME</h6>
             </div>
             <div class="col-md-2">
-                ${product.stock}
+                <h6>PRICE</h6>
             </div>
             <div class="col-md-2">
-                <a class="btn btn-secondary" href="${pageContext.request.contextPath}/EditProduct?id=${product.id}" role="button">Edit Product</a>
+                <h6>STOCK</h6>
             </div>
         </div>
-    </c:forEach>
+        <hr class="my-2">
+        <c:forEach var="product" items="${products}" varStatus="status">
+            <div class="row">
+                <div class="col-md-2">
+                    <input type="checkbox" name="product_ids" value="${product.id}"/>
+                </div>
+                <div class="col-md-2">
+                    ${product.barcode}
+                </div>
+                <div class="col-md-2">
+                    ${product.product_name}
+                </div>
+                <div class="col-md-2">
+                    ${product.price}
+                </div>
+                <div class="col-md-2">
+                    ${product.stock}
+                </div>
+                <div class="col-md-2">
+                    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/EditProduct?id=${product.id}" role="button">Edit Product</a>
+                </div>
+            </div>
+        </c:forEach>
+    </form>
 </t:pageTemplate>

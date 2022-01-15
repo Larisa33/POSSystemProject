@@ -11,7 +11,7 @@
 
 <t:pageTemplate pageTitle="Manage Stocks">
     <h1>Manage stocks</h1>
-    <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Products/Stocks">
+    <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Administrator/Products/Stocks">
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="barcode" class="form-label">Barcode </label>

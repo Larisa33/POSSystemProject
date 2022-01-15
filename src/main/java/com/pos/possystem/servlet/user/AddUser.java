@@ -2,16 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package com.pos.possystem.servlet;
+package com.pos.possystem.servlet.user;
 
-import com.pos.possystem.ejb.ProductBean;
+import com.pos.possystem.ejb.UserBean;
+import com.pos.possystem.util.PasswordUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.annotation.security.DeclareRoles;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.HttpConstraint;
-import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,17 +19,12 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Larisa
  */
-@DeclareRoles({"AdminRole", "ManagerRole", "CasierRole"})
-@ServletSecurity(
-        value = @HttpConstraint(
-                rolesAllowed = {"AdminRole"}
-        )
-)
-@WebServlet(name = "Stocks", urlPatterns = {"/Administrator/Products/Stocks"})
-public class Stocks extends HttpServlet {
+@WebServlet(name = "AddUser", urlPatterns = {"/Administrator/Users/AddUser"})
+public class AddUser extends HttpServlet {
 
-    @Inject 
-    ProductBean productBean;
+    @Inject
+    UserBean userBean;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -49,10 +42,10 @@ public class Stocks extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Stocks</title>");
+            out.println("<title>Servlet AddUser</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Stocks at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddUser at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -70,8 +63,7 @@ public class Stocks extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/pages/stocks.jsp").forward(request, response);
-        // processRequest(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/addUser.jsp").forward(request, response);
     }
 
     /**
@@ -85,14 +77,15 @@ public class Stocks extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int barcode = Integer.parseInt(request.getParameter("barcode"));
-        String product_name = request.getParameter("product_name");
-        int price = Integer.parseInt(request.getParameter("price"));
-        int stock = Integer.parseInt(request.getParameter("stock"));
-        
-        productBean.createProduct(barcode, product_name, price, stock);
-        
-        response.sendRedirect(request.getContextPath()+"/Administrator/Products");
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String position = request.getParameter("position");
+
+        String passwordSha256 = PasswordUtil.convertToSha256(password);
+
+        userBean.createUser(username, email, passwordSha256, position);
+        response.sendRedirect(request.getContextPath() + "/Administrator/Users");
     }
 
     /**

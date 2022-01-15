@@ -11,9 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.annotation.security.DeclareRoles;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -28,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Larisa
  */
+//Au fost precizate rolurile existente si cele care au acces
+//la pagina cashier.jsp
 @DeclareRoles({"AdminRole", "ManagerRole", "CasierRole"})
 @ServletSecurity(
         value = @HttpConstraint(
@@ -35,6 +35,7 @@ import javax.servlet.http.HttpServletResponse;
         )
 )
 
+//Ruta la care se gaseste pagina cashier.jsp
 @WebServlet(name = "Cashier", urlPatterns = {"/Cashier"})
 public class Cashier extends HttpServlet {
 
@@ -42,7 +43,7 @@ public class Cashier extends HttpServlet {
     SaleBean saleBean;
 
     @Inject
-    private ProductBean productBean;
+    ProductBean productBean;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -83,19 +84,24 @@ public class Cashier extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("activePage", "Products");
+
+//       products se populeaza folosind getAllProducts() din ProdictBean
         List<ProductDetails> products = productBean.getAllProducts();
+
+//        setam in ghilimele numele obiectului cu care vom afisa datele pe pagina
+//        cashier.jsp, iar dupa virgula precizam ca "products" se populeaza cu
+//        datele din lista creata anterior
         request.setAttribute("products", products);
-        
-        if(!saleBean.getProductIds().isEmpty()){
-            Collection<String> product_names= productBean.findNames(saleBean.getProductIds());
-            Collection<String> product_price= productBean.findPrice(saleBean.getProductIds());
-            request.setAttribute("sale",product_names);
-            request.setAttribute("sale_price",product_price);
-            System.out.println("Aici e price: " + product_price);
-            System.out.println("Aici e sale: " + product_names);
+
+        if (!saleBean.getProductIds().isEmpty()) {
+            Collection<String> product_names = productBean.findNames(saleBean.getProductIds());
+            Collection<String> product_price = productBean.findPrice(saleBean.getProductIds());
+            request.setAttribute("sale", product_names);
+            request.setAttribute("sale_price", product_price);
         }
+
         request.getRequestDispatcher("/WEB-INF/pages/cashier.jsp").forward(request, response);
-        //processRequest(request, response);
+
     }
 
     /**
@@ -109,18 +115,20 @@ public class Cashier extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
+//        "productIdsAsString" se populeaza cu id-urile venite prin bifarea
+//                unui checkbox, daca acesta nu este null cream o lista cu toate
+//                id-urile facand conversie de la String la Integer
+
         String[] productIdsAsString = request.getParameterValues("product_id");
-        System.out.println("la string[]: " + productIdsAsString);
         if (productIdsAsString != null) {
-            List <Integer> productIds = new ArrayList<Integer>();
-            for(String productIdAsString : productIdsAsString) {
+            List<Integer> productIds = new ArrayList<Integer>();
+            for (String productIdAsString : productIdsAsString) {
                 productIds.add(Integer.parseInt(productIdAsString));
             }
             saleBean.getProductIds().addAll(productIds);
         }
         response.sendRedirect(request.getContextPath() + "/Cashier");
-//         processRequest(request, response);
     }
 
     /**

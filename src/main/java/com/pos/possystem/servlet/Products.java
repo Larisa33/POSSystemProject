@@ -8,6 +8,7 @@ import com.pos.possystem.common.ProductDetails;
 import com.pos.possystem.ejb.ProductBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.security.DeclareRoles;
 import javax.inject.Inject;
@@ -29,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
                 rolesAllowed = {"AdminRole"}
         )
 )
-@WebServlet(name = "Products", urlPatterns = {"/Products"})
+@WebServlet(name = "Products", urlPatterns = {"/Administrator/Products"})
 public class Products extends HttpServlet {
     
     @Inject
@@ -91,7 +92,16 @@ public class Products extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String[] productIdsAsString = request.getParameterValues("product_ids");
+        if(productIdsAsString != null) {
+            List<Integer> productIds= new ArrayList<>();
+            for(String productIdAsString : productIdsAsString) {
+                productIds.add(Integer.parseInt(productIdAsString));
+            }
+            productBean.deleteProductByIds(productIds);
+        }
+        response.sendRedirect(request.getContextPath() + "/Administrator/Products");
     }
 
     /**

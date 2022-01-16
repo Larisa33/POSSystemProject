@@ -41,7 +41,7 @@
             .form-signin .form-floating:focus-within {
                 z-index: 2;
             }
-            
+
             .btn-spaceing {
                 margin-bottom: 15px;
             }
@@ -54,10 +54,9 @@
         <main class="form-signin">
             <form>
                 <h1 class="h3 mb-3 fw-normal">Buna ziua!</h1>
-
-                <a class="w-100 btn btn-lg btn-primary btn-spaceing"  href="${pageContext.request.contextPath}/Administrator/Users" role="button">Manage Users</a>
                 <a class="w-100 btn btn-lg btn-primary btn-spaceing"  href="${pageContext.request.contextPath}/Administrator/Products" role="button">Manage Stocks</a>
-                <a class="w-100 btn btn-lg btn-primary btn-spaceing"  href="${pageContext.request.contextPath}/Returns" role="button">Handle returns</a>
+                <a class="w-100 btn btn-lg btn-primary btn-spaceing"  href="${pageContext.request.contextPath}/Administrator/Users" role="button">Manage Users</a>
+                <a class="w-100 btn btn-lg btn-primary btn-spaceing"  href="${pageContext.request.contextPath}/Sales" role="button">See all sales</a>
                 <a class="w-100 btn btn-lg btn-primary btn-spaceing"  href="${pageContext.request.contextPath}/Logout">Go back to main page</a>
             </form>
         </main>

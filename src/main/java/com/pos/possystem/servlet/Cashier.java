@@ -48,6 +48,7 @@ public class Cashier extends HttpServlet {
     
     int ab=0;
     int pret=0;
+    int ct=1;
     ArrayList<ProductDetails> bon1 = new ArrayList();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -115,7 +116,10 @@ public class Cashier extends HttpServlet {
         if(product!=null){
         bon1.add(product);
         pret=pret+product.getPrice();
+        request.setAttribute("ct",ct);
+        ct++;
         }
+     
         request.setAttribute("pret", pret);
         request.setAttribute("bon1", bon1);
         request.getRequestDispatcher("/WEB-INF/pages/cashier.jsp").forward(request, response);

@@ -279,11 +279,11 @@
             width:  210px;
             margin-right:40px;
         }
-        
+
         .produse {
             height: 370px;
         }
-        
+
         .button-subit {
             width: 210px;
             height: 30px;
@@ -358,13 +358,10 @@
 </style>
 
 <script>
-
     function addtheproduct() {
         var numar = document.querySelector('#id_product').value;
         document.querySelector('#afis').innerHTML = numar;
     }
-
-
 </script>    
 <t:cashierTemplate pageTitle="Cashier">
     <!-- CLIENT -->
@@ -372,7 +369,10 @@
         <div class="client">
 
             <div class="produse-bon">
-                <div class="prod-info nr" > <h3 class="detalii-mic-bon"> Nr. </h3> </div>
+                <div class="prod-info nume" > 
+                    <h3 class="detalii-mic-bon"> Prod bon </h3> 
+                    <p> ${ct} </p>
+                </div>
                 <div class="prod-info nume" > 
                     <h3 class="detalii"> Nume Produs </h3> 
                     <c:forEach var="product" items="${bon1}" varStatus="status">
@@ -396,7 +396,10 @@
         <div class="casier">
             <!-- ecran unde apar produsele introduse -->
             <div class="afisare-produse">
-                <div class="prod-info" > <h3 class="detalii-mic"> Nr. </h3> </div>
+                <div class="prod-info nume" > 
+                    <h3 class="detalii-mic"> Prod bon  </h3> 
+                    <p> ${ct} </p>
+                </div>
                 <div class="prod-info nume" > 
                     <h3 class="detalii"> Nume Produs </h3> 
                     <c:forEach var="product" items="${bon1}" varStatus="status">
@@ -429,7 +432,7 @@
             </form>
 
 
-            <!-- button plata card -->
+            <!-- button plata-->
             <form method="POST" action="${pageContext.request.contextPath}/Plata">
                 <div class="plata">
                     <button class="button-plata"> PLATA </button>

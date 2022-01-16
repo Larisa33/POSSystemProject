@@ -60,18 +60,25 @@
             <li><a class="active" href="${pageContext.request.contextPath}/Logout">POSSystem</a></li>
                 <c:if test="${pageContext.request.isUserInRole('AdminRole')}">
                 <li class="${activePage eq 'Administrator' ? 'active' : ' '}">
-                    <a href="${pageContext.request.contextPath}/Administrator">Administrator</a>
+                    <a href="${pageContext.request.contextPath}/Administrator/Products">Manage Stocks</a>
+                </li>
+                <li>     
+                    <a href="${pageContext.request.contextPath}/Administrator/Users">Manage Users</a>
+                </li>
+                <li>     
+                    <a href="${pageContext.request.contextPath}/Sales">See all sales</a>
                 </li>
             </c:if>   
             <c:if test="${pageContext.request.isUserInRole('ManagerRole')}">
-                <li class="${activePage eq 'Administrator' ? 'active' : ' '}">
-                    <a href="${pageContext.request.contextPath}/Returns">Manager</a>
+                <li class="${activePage eq 'Manager' ? 'active' : ' '}">
+                    <a href="${pageContext.request.contextPath}/Returns">Handle Returns</a>
+                </li>
+                <li>     
+                    <a href="${pageContext.request.contextPath}/Sales">See all sales</a>
                 </li>
             </c:if> 
             <c:if test="${pageContext.request.isUserInRole('CasierRole')}">
-                <li class="${activePage eq 'Administrator' ? 'active' : ' '}">
-                    <a href="${pageContext.request.contextPath}/Cashier">Cashier</a>
-                </li>
+              
             </c:if> 
             <li class="right">
                 <c:choose>

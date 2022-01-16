@@ -15,6 +15,9 @@
     <hr class="my-4">
     <div class="row">
         <div class="col-md-4">
+            <h6>Bon ID</h6>
+        </div>
+        <div class="col-md-4">
             <h6>BARCODE</h6>
         </div>
         <div class="col-md-4">
@@ -24,6 +27,9 @@
     <hr class="my-2">
     <c:forEach var="return" items="${returns}" varStatus="status">
         <div class="row">
+            <div class="col-md-4">
+                
+            </div>
             <div class="col-md-4">
                 ${return.barcode}
             </div>

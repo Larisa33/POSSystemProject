@@ -13,13 +13,10 @@
     </security-role-mapping>
     <security-role-mapping>
         <role-name>ManagerRole</role-name>
-        <group-name>ADMINISTRATOR</group-name>
         <group-name>MANAGER</group-name>
     </security-role-mapping>
      <security-role-mapping>
         <role-name>CasierRole</role-name>
-        <group-name>ADMINISTRATOR</group-name>
-        <group-name>MANAGER</group-name> 
         <group-name>CASIER</group-name>
     </security-role-mapping>
 </glassfish-web-app>

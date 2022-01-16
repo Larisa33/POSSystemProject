@@ -11,39 +11,19 @@
 
 
 <t:pageTemplate pageTitle="Clients Page">  
-    <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Manager>
-          <div class="row">
-        <div class="col-md-6 mb-3">
-
-            <div class="col-md-3">Nume produs :
-                ${product.product_name}
+    <br> <br>
+    <h3> Detaliile produsului cautat </h3>
+    <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Manager">
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-md-5">
+                <h5>  Nume produs  </h5> ${product.product_name}
             </div>
-            <div class="col-md-3">Pret : 
-                ${product.price} lei
+            <div class="col-md-5">
+                <h5>   Pret </h5> ${product.price} lei
             </div>
         </div>
-    </div>
-
-    <!--        <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="Motiv"> Motiv </label>
-                    <input type="text" class="form-control" id="reason" name="reason" placeholder="Ex: produs defect" value="${product.product_name}" required>
-                    <div class="invalid-feedback">
-                        Acest camp este obligatoriu!
-                    </div>
-                </div>
-            </div>-->
-    <div class="row">
-
-    </div>
-    <hr class="my-4">
-    <a class="w-100 btn btn-primary btn-lg"  href="${pageContext.request.contextPath}/Client" role="button">Check another item</a>
-</form>
-
-<div class="row">
-
-
-</div>    
-
-
+        <hr class="my-4">
+        <a class="w-100 btn btn-primary btn-lg"  href="${pageContext.request.contextPath}/Client" role="button">Check another item</a>
+    </form>
 </t:pageTemplate>

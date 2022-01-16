@@ -1,4 +1,4 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
@@ -7,6 +7,8 @@ package com.pos.possystem.servlet;
 import com.pos.possystem.common.ProductDetails;
 import com.pos.possystem.ejb.ProductBean;
 import com.pos.possystem.ejb.SaleBean;
+import com.pos.possystem.ejb.SaleNumberBean;
+import com.pos.possystem.ejb.SaleProcess;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -40,16 +42,19 @@ import javax.servlet.http.HttpServletResponse;
 public class Cashier extends HttpServlet {
 
     @Inject
-    SaleBean saleBean;
+    SaleProcess saleProcessBean;
 
     @Inject
     private ProductBean productBean;
 
-    
-    int ab=0;
-    int pret=0;
-    int ct=1;
+    @Inject
+    SaleNumberBean saleNumberBean;
+
+    int ab = 0;
+    int pret = 0;
+    int ct = 1;
     ArrayList<ProductDetails> bon1 = new ArrayList();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -105,25 +110,28 @@ public class Cashier extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
- ArrayList<ProductDetails> bon;
-       if(ab==0){
-       bon=new ArrayList();
-       }
-        int productNr = Integer.parseInt(request.getParameter("nr_product"));
-        String a=request.getParameter("id_product");
-        int productId=Integer.parseInt(request.getParameter("id_product"));
-        ProductDetails product=productBean.findByBarcode(productId);
-        request.setAttribute("product", product);
-        if(product!=null){
-             while (productNr != 0) {
-        bon1.add(product);
-        pret=pret+product.getPrice();
-        request.setAttribute("ct",ct);
-        ct++;
-        productNr--;
-             }
+        Integer saleId = saleNumberBean.lastSale();
+        ArrayList<ProductDetails> bon;
+        if (ab == 0) {
+            bon = new ArrayList();
         }
-     
+        int productNr = Integer.parseInt(request.getParameter("nr_product"));
+        String a = request.getParameter("id_product");
+        int productId = Integer.parseInt(request.getParameter("id_product"));
+        ProductDetails product = productBean.findByBarcode(productId);
+        request.setAttribute("product", product);
+        if (product != null) {
+            while (productNr != 0) {
+//                System.out.println("Aici e saleid" + saleId);
+                saleProcessBean.createSale(saleId, product.getProduct_name(), product.getPrice(), product.getBarcode());
+                bon1.add(product);
+                pret = pret + product.getPrice();
+                request.setAttribute("ct", ct);
+                ct++;
+                productNr--;
+            }
+        }
+
         request.setAttribute("pret", pret);
         request.setAttribute("bon1", bon1);
         request.getRequestDispatcher("/WEB-INF/pages/cashier.jsp").forward(request, response);

@@ -9,11 +9,12 @@ package com.pos.possystem.common;
  * @author DANIELA
  */
 public class ProductDetails implements java.io.Serializable {
-     private Integer id;
-         private Integer barcode;
-   private String product_name;
+
+    private Integer id;
+    private Integer barcode;
+    private String product_name;
     private Integer price;
-   private Integer stock;
+    private Integer stock;
 
     public ProductDetails(Integer id, Integer barcode, String product_name, Integer price, Integer stock) {
         this.id = id;
@@ -22,7 +23,7 @@ public class ProductDetails implements java.io.Serializable {
         this.price = price;
         this.stock = stock;
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -42,6 +43,5 @@ public class ProductDetails implements java.io.Serializable {
     public Integer getStock() {
         return stock;
     }
-  
-    
+
 }

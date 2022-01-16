@@ -6,6 +6,7 @@ package com.pos.possystem.ejb;
 
 import com.pos.possystem.common.ProductDetails;
 import com.pos.possystem.entity.Product;
+import com.pos.possystem.entity.SaleNumber;
 import com.pos.possystem.entity.User;
 import java.util.Collection;
 import java.util.ArrayList;
@@ -135,5 +136,13 @@ public class ProductBean {
         Integer stock = product.getStock() + 1;
         updateProduct(product.getId(), product.getBarcode(), product.getProduct_name(), product.getPrice(), stock);
 
+    }
+
+    public void createNewSale(Integer saleId) {
+        LOG.info("createSale");
+        SaleNumber sale = new SaleNumber();
+        sale.setSaleId(saleId);
+        
+        em.persist(sale);
     }
 }

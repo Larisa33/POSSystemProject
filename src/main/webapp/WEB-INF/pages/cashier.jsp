@@ -141,10 +141,7 @@
 
     /*MEDIA QUERY 1*/
     @media only screen and (max-width: 1870px) {
-        body {
-            background-color: red;
-        }
-
+       
         /*CASIER*/
         .col-md-2{
             margin-right: 20px;
@@ -245,9 +242,6 @@
 
     /*MEDIA QUERY 2*/
     @media only screen and (max-width: 1560px) {
-        body {
-            background-color: blue;
-        }
         .col-md-2{
             margin-right: 10px;
         }
@@ -430,8 +424,6 @@
                     <button class="button-plata" type="submit"> Scan product </button>
                 </div>
             </form>
-
-
             <!-- button plata-->
             <form method="POST" action="${pageContext.request.contextPath}/Plata">
                 <div class="plata">

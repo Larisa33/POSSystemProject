@@ -73,15 +73,7 @@ public class Plata extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-       // request.getSession().invalidate();
-    //  ArrayList<ProductDetails> bon = request.getParameter("product");
-   // ArrayList<ProductDetails> bon=returnbon();
-       
-       
-       
-       
-        request.getRequestDispatcher("/WEB-INF/pages/cashier.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/newSale.jsp").forward(request, response);
     }
 
     /**

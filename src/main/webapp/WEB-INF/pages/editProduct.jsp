@@ -80,8 +80,4 @@
             }, false);
         })();
     </script>
-
-
-
-
 </t:pageTemplate>

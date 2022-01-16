@@ -4,8 +4,10 @@
  */
 package com.pos.possystem.servlet;
 
+import com.pos.possystem.common.ProductDetails;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -72,7 +74,13 @@ public class Plata extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-        request.getSession().invalidate();
+       // request.getSession().invalidate();
+    //  ArrayList<ProductDetails> bon = request.getParameter("product");
+   // ArrayList<ProductDetails> bon=returnbon();
+       
+       
+       
+       
         request.getRequestDispatcher("/WEB-INF/pages/cashier.jsp").forward(request, response);
     }
 

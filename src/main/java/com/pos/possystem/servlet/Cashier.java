@@ -109,15 +109,19 @@ public class Cashier extends HttpServlet {
        if(ab==0){
        bon=new ArrayList();
        }
+        int productNr = Integer.parseInt(request.getParameter("nr_product"));
         String a=request.getParameter("id_product");
         int productId=Integer.parseInt(request.getParameter("id_product"));
         ProductDetails product=productBean.findByBarcode(productId);
         request.setAttribute("product", product);
         if(product!=null){
+             while (productNr != 0) {
         bon1.add(product);
         pret=pret+product.getPrice();
         request.setAttribute("ct",ct);
         ct++;
+        productNr--;
+             }
         }
      
         request.setAttribute("pret", pret);

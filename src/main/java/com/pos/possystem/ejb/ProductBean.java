@@ -86,7 +86,7 @@ public class ProductBean {
 
     public ProductDetails findById(Integer productId) {
         Product product = em.find(Product.class, productId);
-         System.out.println("AAAAAIn bean: " + product.getId() + product.getBarcode());
+        System.out.println("AAAAAIn bean: " + product.getId() + product.getBarcode());
         return new ProductDetails(product.getId(), product.getBarcode(), product.getProduct_name(), product.getPrice(), product.getStock());
 //        System.out.println("In bean: " + product.getId() + product.getBarcode());
     }
@@ -110,6 +110,7 @@ public class ProductBean {
         return names;
     }
 //    metoda care imi da pretul produsului in functie de id
+
     public Collection<String> findPrice(Collection<Integer> productIds) {
         LOG.info("findPrice");
         List<String> price = (List<String>) em.createQuery("SELECT p.price FROM Product p WHERE p.id IN ?1")
@@ -120,9 +121,19 @@ public class ProductBean {
 
     public void deleteProductByIds(Collection<Integer> ids) {
         LOG.info("deleteProductByIds");
-        for(Integer id : ids) {
+        for (Integer id : ids) {
             Product product = em.find(Product.class, id);
             em.remove(product);
         }
+    }
+
+    public void returnProduct(Integer productId) {
+
+        LOG.info("updateProduct");
+
+        ProductDetails product = findByBarcode(productId);
+        Integer stock = product.getStock() + 1;
+        updateProduct(product.getId(), product.getBarcode(), product.getProduct_name(), product.getPrice(), stock);
+
     }
 }

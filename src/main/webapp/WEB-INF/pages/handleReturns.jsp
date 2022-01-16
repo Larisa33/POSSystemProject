@@ -12,16 +12,24 @@
 <t:pageTemplate pageTitle="Handle Returns">
     <h1>Handle Returns</h1>
     <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Returns/HandleReturns">
-       <div class="row">
+        <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="barcode"> Cod de bare </label>
-                <input type="text" class="form-control" id="barcode" name="barcode" placeholder="ex:123456" value="" required>
+                <input type="text" class="form-control" id="barcode" name="barcode" placeholder="" value="" required>
                 <div class="invalid-feedback">
-                      Acest camp este obligatoriu!
+                    Acest camp este obligatoriu!
                 </div>
             </div>
         </div>
-
+<!--        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="stock"> Cantitate </label>
+                <input type="text" class="form-control" id="stock" name="stock" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                    Acest camp este obligatoriu!
+                </div>
+            </div>
+        </div> -->
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="reason"> Motiv </label>
@@ -62,4 +70,3 @@
     </script>
 </t:pageTemplate>
 
- 

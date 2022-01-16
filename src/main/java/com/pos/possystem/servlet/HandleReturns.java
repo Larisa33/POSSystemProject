@@ -4,6 +4,7 @@
  */
 package com.pos.possystem.servlet;
 
+import com.pos.possystem.ejb.ProductBean;
 import com.pos.possystem.ejb.ReturnBean;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -32,6 +33,9 @@ public class HandleReturns extends HttpServlet {
 
     @Inject
     ReturnBean returnBean;
+    @Inject
+    ProductBean productBean;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,12 +48,12 @@ public class HandleReturns extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HandleReturns</title>");            
+            out.println("<title>Servlet HandleReturns</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet HandleReturns at " + request.getContextPath() + "</h1>");
@@ -71,7 +75,7 @@ public class HandleReturns extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/pages/handleReturns.jsp").forward(request, response);
-       // processRequest(request, response);
+        // processRequest(request, response);
     }
 
     /**
@@ -85,12 +89,14 @@ public class HandleReturns extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int barcode = Integer.parseInt(request.getParameter("barcode"));
+        Integer barcode = Integer.parseInt(request.getParameter("barcode"));
+        //Integer stock = Integer.parseInt(request.getParameter("stock"));
         String reason = request.getParameter("reason");
-       
-       returnBean.createReturn(barcode, reason);
-       response.sendRedirect(request.getContextPath()+"/Returns");
-        
+        productBean.returnProduct(barcode);
+        returnBean.createReturn(barcode, reason);
+        // productBean.returnProduct(barcode, stock);
+        response.sendRedirect(request.getContextPath() + "/Returns");
+
     }
 
     /**

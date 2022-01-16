@@ -29,14 +29,11 @@ public class SaleNumberBean {
 
     public Integer lastSale() {
         Integer saleId = 0;
-         System.out.println("In lastSale");
         try {
             Query query = em.createQuery("SELECT s FROM SaleNumber s");
             List<SaleNumber> sales = (List<SaleNumber>) query.getResultList();
             for (SaleNumber sale : sales) {
-                System.out.println("Last sale for: " + sale);
                 saleId = sale.getSaleId();
-                  System.out.println("Last sale for si id: " + saleId);
             }
             return saleId;
         } catch (Exception ex) {

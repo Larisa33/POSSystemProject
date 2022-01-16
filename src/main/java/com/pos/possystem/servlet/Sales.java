@@ -4,9 +4,13 @@
  */
 package com.pos.possystem.servlet;
 
+import com.pos.possystem.common.SaleDetails;
+import com.pos.possystem.ejb.SaleProcess;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.annotation.security.DeclareRoles;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.HttpConstraint;
 import javax.servlet.annotation.ServletSecurity;
@@ -27,6 +31,9 @@ import javax.servlet.http.HttpServletResponse;
 )
 @WebServlet(name = "Sales", urlPatterns = {"/Sales"})
 public class Sales extends HttpServlet {
+    
+    @Inject
+    SaleProcess saleProcess;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -66,6 +73,9 @@ public class Sales extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        List<SaleDetails> sales = saleProcess.getAllSales();
+        request.setAttribute("sales", sales);
+        System.out.println("Aici am salesurile" + sales);
          request.getRequestDispatcher("/WEB-INF/pages/sales.jsp").forward(request, response);
        // processRequest(request, response);
     }

@@ -8,10 +8,10 @@ package com.pos.possystem.common;
  *
  * @author Larisa
  */
-public class NewSaleDetails {
+public class SaleNumberDetails {
       private Integer id;
       private Integer saleId;
-      public NewSaleDetails(Integer id, Integer saleId) {
+      public SaleNumberDetails(Integer id, Integer saleId) {
         this.id = id;
         this.saleId = saleId;
     }

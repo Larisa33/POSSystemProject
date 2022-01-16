@@ -25,16 +25,18 @@
             </div>
         </div>
         <hr class="my-2">
-        <div class="row">
-            <div class="col-md-4">
-
+        <c:forEach var="sale" items="${sales}" varStatus="status">
+            <div class="row">
+                <div class="col-md-4">
+                    ${sale.saleId}
+                </div>
+                <div class="col-md-4">
+                    ${sale.barcode}
+                </div>
+                <div class="col-md-4">
+                    ${sale.product_name}
+                </div>
             </div>
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-md-4">
-
-            </div>
-        </div>
+        </c:forEach>
     </form>
 </t:pageTemplate>

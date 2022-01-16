@@ -10,13 +10,13 @@ package com.pos.possystem.common;
  */
 public class SaleDetails {
 
-    private Integer id;
+    private Long id;
     private Integer saleId;
     private String product_name;
     private Integer price;
     private Integer barcode;
 
-    public SaleDetails(Integer id, Integer saleId, String product_name, Integer price, Integer barcode) {
+    public SaleDetails(Long id, Integer saleId, String product_name, Integer price, Integer barcode) {
         this.id = id;
         this.saleId = saleId;
         this.product_name = product_name;
@@ -24,11 +24,11 @@ public class SaleDetails {
         this.barcode = barcode;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

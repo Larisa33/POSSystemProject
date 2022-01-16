@@ -11,8 +11,11 @@ import com.pos.possystem.ejb.ProductBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +25,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Denisa
  */
+@DeclareRoles({"AdminRole", "ManagerRole", "CasierRole"})
+@ServletSecurity(
+        value = @HttpConstraint(
+                rolesAllowed = {"AdminRole"}
+        )
+)
+
 @WebServlet(name = "EditProduct", urlPatterns = {"/Administrator/Products/EditProduct"})
 public class EditProduct extends HttpServlet {
 

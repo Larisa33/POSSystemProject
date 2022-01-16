@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 @DeclareRoles({"AdminRole", "ManagerRole", "CasierRole"})
 @ServletSecurity(
         value = @HttpConstraint(
-                rolesAllowed = {"AdminRole", "ManagerRole", "CasierRole"}
+                rolesAllowed = {"CasierRole"}
         )
 )
 

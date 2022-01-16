@@ -8,7 +8,7 @@
     <h1>Manage stocks</h1>
     <form method="POST" action="${pageContext.request.contextPath}/Administrator/Products">
         <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/Administrator/Products/Stocks" role="button">Add new product &raquo;</a>
-        <button class="btn btn-danger" type="submit">Delete User</button>
+        <button class="btn btn-danger" type="submit">Delete Product</button>
         <hr class="my-4">
         <div class="row">
              <div class="col-md-2">
